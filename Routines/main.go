@@ -14,22 +14,22 @@ func main() {
 		"http://www.stackoverflow.com",
 	}
 
-	c := make(chan bool)
+	done := make(chan bool)
 
 	for _, link := range links {
-		go checkLink(link, c)
+		go checkLink(link, done)
 	}
-	for i := range links {
-		fmt.Println(i+1, <-c)
+	for i := 0; i < len(links); i++ {
+		<-done
 	}
 }
 
-func checkLink(link string, c chan bool) {
+func checkLink(link string, done chan bool) {
 	_, err := http.Get(link)
 	if err != nil {
 		fmt.Println(err)
-		c <- false
+		done <- false
 	}
-	fmt.Println("Website is up")
-	c <- true
+	fmt.Println("Website is up", link)
+	done <- true
 }

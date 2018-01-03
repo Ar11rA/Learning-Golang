@@ -22,4 +22,22 @@ func main() {
 	firstHand.print()
 	firstHand.shuffle()
 	firstHand.print()
+	//helpers
+	arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
+	a, arr := pop(arr, 4)
+	fmt.Println("Popped   : ", a, arr)
+	a, arr = shift(arr)
+	fmt.Println("Shifted  : ", a, arr)
+	arr = unshift(arr, 10)
+	fmt.Println("Unshifted: ", arr)
+	arr = reverse(arr)
+	fmt.Println("Reversed : ", arr)
+	arr = maps(arr, func(r int) int {
+		return r * 2
+	})
+	fmt.Println("Mapped   : ", arr)
+	a = reduce(arr, func(prev int, now int) int {
+		return prev + now
+	})
+	fmt.Println("Reduced  : ", a)
 }
