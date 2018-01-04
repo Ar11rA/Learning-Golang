@@ -6,10 +6,12 @@ import (
 )
 
 func main() {
-	links := searchGoogle("bob dylan toptens")
+	links := searchGoogle("bob dylan")
 	fmt.Println("------------------- LINKS ----------------------")
 	print(links)
 	tracks := getTopTen(links)
 	fmt.Println("------------------- TRACKS ----------------------")
 	print(tracks)
+	fmt.Println("------------------- DOWNLOADING ----------------------")
+	tracks.download()
 }
