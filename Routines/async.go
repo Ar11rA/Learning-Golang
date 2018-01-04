@@ -29,6 +29,9 @@ func main() {
 	go worker(done, 3)
 	// Block until we receive a notification from the
 	// worker on the channel.
+	fmt.Println('b')
 	<-done
+	fmt.Println('i')
 	<-done
+	fmt.Println('a')
 }
