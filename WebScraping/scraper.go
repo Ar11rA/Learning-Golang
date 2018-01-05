@@ -41,7 +41,7 @@ func getTopTen(l links) tracks {
 	}
 	results := tracks{}
 	doc.Find(".image100").Each(func(index int, item *goquery.Selection) {
-		track := item.Find("b").Text()
+		track := item.Find("b").First().Text()
 		results = append(results, track)
 	})
 	return results
