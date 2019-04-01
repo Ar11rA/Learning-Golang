@@ -20,18 +20,18 @@ func worker(done chan bool, num int) {
 	done <- true
 }
 
-func main() {
+// func main() {
 
-	// Start a worker goroutine, giving it the channel to
-	// notify on.
-	done := make(chan bool, 1)
-	go worker(done, 5)
-	go worker(done, 3)
-	// Block until we receive a notification from the
-	// worker on the channel.
-	fmt.Println('b')
-	<-done
-	fmt.Println('i')
-	<-done
-	fmt.Println('a')
-}
+// 	// Start a worker goroutine, giving it the channel to
+// 	// notify on.
+// 	done := make(chan bool, 1)
+// 	go worker(done, 5)
+// 	go worker(done, 3)
+// 	// Block until we receive a notification from the
+// 	// worker on the channel.
+// 	fmt.Println('b')
+// 	<-done
+// 	fmt.Println('i')
+// 	<-done
+// 	fmt.Println('a')
+// }
