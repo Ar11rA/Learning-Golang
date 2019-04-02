@@ -16,6 +16,9 @@ As you see, go brings the best of both worlds. Go provides you high performance 
 6. Routines
 7. Http Module
 8. Testing and Error Handling
+9. Templating
+10. Files
+11. Scraping
 
 ## How to run
 
