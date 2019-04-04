@@ -1,0 +1,7 @@
+{
+"appId": "PING",
+"data": {
+	"name": "{{ .Name }}",
+	"value": "{{ .Value }}"
+}
+}
