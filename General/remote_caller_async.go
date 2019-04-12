@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"io/ioutil"
 	"log"
@@ -32,7 +33,7 @@ func getResourceContents(path string) []byte {
 	return d
 }
 
-func formRequest(contents []byte, d data) *bytes.Buffer {
+func formRequest(contents []byte, d interface{}) *bytes.Buffer {
 	t := template.New("request_template")
 	s := string(contents)
 	t, _ = t.Parse(s)
@@ -59,6 +60,14 @@ func makePostRequest(remoteURL string, buf *bytes.Buffer, out chan string) {
 
 func main() {
 	path := "./resources/request_template.txt"
+	s1 := `
+	{
+		"Name": "qwe",
+		"Value": 20
+	}
+	`
+	var result interface{}
+	json.Unmarshal([]byte(s1), &result)
 	data1 := data{
 		Name:  "def",
 		Value: 10,
@@ -75,10 +84,13 @@ func main() {
 	requestTemplate1 := formRequest(fileContents, data1)
 	requestTemplate2 := formRequest(fileContents, data2)
 	requestTemplate3 := formRequest(fileContents, data3)
+	requestTemplate4 := formRequest(fileContents, result)
 	out := make(chan string)
 	go makePostRequest("http://localhost:3000/ping", requestTemplate1, out)
 	go makePostRequest("http://localhost:3000/ping", requestTemplate2, out)
 	go makePostRequest("http://localhost:3000/ping", requestTemplate3, out)
+	go makePostRequest("http://localhost:3000/ping", requestTemplate4, out)
+	log.Println(<-out)
 	log.Println(<-out)
 	log.Println(<-out)
 	log.Println(<-out)
